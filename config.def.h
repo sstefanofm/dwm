@@ -63,19 +63,19 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", dmenulines, "-m", dmenumon, NULL };
-static const char *termcmd[]  = { "urxvt", NULL };
-static const char *emojipickercmd[] = { "ibus", "emoji", NULL };
-static const char *surfcmd[] = { "surf", NULL };
-static const char *setkbcmd[] = { "changekblayout", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
+/*static const char *emojipickercmd[] = { "ibus", "emoji", NULL };
+static const char *surfcmd[] = { "surf", NULL }; 
+static const char *setkbcmd[] = { "changekblayout", NULL }; */
 
 #include "shiftview.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          { .v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          { .v = termcmd } },
+	{ MODKEY,                       XK_Return, spawn,          { .v = termcmd } }, /*
 	{ MODKEY,                       XK_e,      spawn,          { .v = emojipickercmd } },
 	{ MODKEY,                       XK_s,      spawn,          { .v = surfcmd } },
-        { MODKEY,                       XK_k,      spawn,          { .v = setkbcmd } },
+        { MODKEY,                       XK_k,      spawn,          { .v = setkbcmd } }, */
 	{ MODKEY,                       XK_b,      togglebar,      { 0 } },
 	{ MODKEY,                       XK_j,      focusstack,     { .i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     { .i = -1 } },
