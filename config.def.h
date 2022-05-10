@@ -1,25 +1,25 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char buttonbar[]       = "  ";
 static const char *fonts[]          = { "JetBrainsMono Nerd Font Mono:size=11:style=SemiBold" };
 static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
+static const char col_gray3[]       = "#928374";
+static const char col_gray4[]       = "#a89984";
 static const char col_cyan[]        = "#005577";
 static const char col_black1[]      = "#272727";
-static const char col_black2[]      = "#222222";
-static const char col_white1[]      = "#abb2bf";
-static const char col_white2[]      = "#ffffff";
+static const char col_black2[]      = "#000000";
+static const char col_white1[]      = "#e5c07b";
+static const char col_white2[]      = "#ebdbb2";
 static const char *colors[][3]      = {
 	/*               fg         bg          border   */
-	[SchemeNorm] = { col_white1, col_black2, col_gray2 },
-	[SchemeSel]  = { col_white1, col_black1, col_white2 },
+	[SchemeNorm] = { col_gray3, col_black2, col_black1 },
+	[SchemeSel]  = { col_white2, col_black1, col_gray4 },
 };
 
 /* tagging */
