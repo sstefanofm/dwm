@@ -31,8 +31,11 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating    monitor */
-  { "Pavucontrol", NULL,    NULL,       1 << 9,       1             -1 },
-  { "Thunar",      NULL,    NULL,       1 << 9,       1             -1 },
+  { "Pavucontrol", NULL,    NULL,       1 << 9,       1,            -1 },
+  { "Thunar",      NULL,    NULL,       1 << 9,       1,            -1 },
+  { "Galculator",  NULL,    NULL,       1 << 9,       1,            -1 },
+  { "Mugshot",     NULL,    NULL,       5,            1,            -1 },
+  { "Xfce4-*",     NULL,    NULL,       5,            1,            -1 },
 };
 
 /* layout(s) */
@@ -63,9 +66,10 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "10", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
-static const char *inclight[] = { "xbacklight", "-inc", "10", NULL };
-static const char *declight[] = { "xbacklight", "-dec", "10", NULL };
+/* static const char *inclight[] = { "xbacklight", "-inc", "10", NULL }; */
+/* static const char *declight[] = { "xbacklight", "-dec", "10", NULL }; */
 static const char *xmenucmd[] = { "/home/stf/.config/xmenu/xmenu.sh", NULL };
+static const char *keyboardcmd[] = { "/home/stf/bin/change_key_layout.bash", NULL };
 
 #include "patches/shiftview.c"
 static Key keys[] = {
@@ -108,9 +112,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                       7)
 	TAGKEYS(                        XK_9,                       8)
 	{ MODKEY|ShiftMask,             XK_q,       quit,           {0} },
-  { 0,              XF86XK_MonBrightnessUp,   spawn,          { .v = inclight } },
-  { 0,              XF86XK_MonBrightnessDown, spawn,          { .v = declight } },
+  /* { 0,              XF86XK_MonBrightnessUp,   spawn,          { .v = inclight } }, */
+  /* { 0,              XF86XK_MonBrightnessDown, spawn,          { .v = declight } }, */
   { MODKEY,                       XK_grave,   spawn,          { .v = xmenucmd } },
+  { MODKEY|ShiftMask,             XK_k,       spawn,          { .v = keyboardcmd } },
 };
 
 /* button definitions */
