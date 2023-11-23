@@ -28,8 +28,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating    monitor */
 	/* { "Gimp",     NULL,       NULL,       0,            1,           -1 }, */
-  { "color-picker", NULL,   NULL,       0,            1,            -1 },
-  { "io.elementary.files", NULL, NULL,  0,            1,            -1 },
+  { "ColorPicker", NULL,   NULL,       0,            1,            -1 },
+  { "Io.elementary.files", NULL, NULL,  0,            1,            -1 },
 };
 
 /* layout(s) */
