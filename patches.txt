@@ -1,0 +1,2 @@
+https://dwm.suckless.org/patches/autostart/dwm-autostart-20210120-cb3f58a.diff
+https://dwm.suckless.org/patches/restartsig/dwm-restartsig-20180523-6.2.diff
