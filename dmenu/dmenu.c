@@ -25,14 +25,16 @@
 #define TEXTW(X)              (drw_fontset_getwidth(drw, (X)) + lrpad)
 
 /* enums */
-enum { SchemeNorm, SchemeSel, SchemeOut, SchemeLast }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeHp, SchemeOut, SchemeLast }; /* color schemes */
 
 struct item {
 	char *text;
 	struct item *left, *right;
-	int out;
+	int out, hp;
 };
 
+static char **hpitems = NULL;
+static int hplength = 0;
 static char text[BUFSIZ] = "";
 static char *embed;
 static int bh, mw, mh;
@@ -62,6 +64,42 @@ textw_clamp(const char *str, unsigned int n)
 {
 	unsigned int w = drw_fontset_getwidth_clamp(drw, str, n) + lrpad;
 	return MIN(w, n);
+}
+
+static char **
+tokenize(char *source, const char *delim, int *llen)
+{
+	int listlength = 0, list_size = 0;
+	char **list = NULL, *token;
+
+	token = strtok(source, delim);
+	while (token) {
+		if (listlength + 1 >= list_size) {
+			if (!(list = realloc(list, (list_size += 8) * sizeof(*list))))
+				die("Unable to realloc %zu bytes\n", list_size * sizeof(*list));
+		}
+		if (!(list[listlength] = strdup(token)))
+			die("Unable to strdup %zu bytes\n", strlen(token) + 1);
+		token = strtok(NULL, delim);
+		listlength++;
+	}
+
+	*llen = listlength;
+	return list;
+}
+
+static int
+arrayhas(char **list, int length, char *item)
+{
+	int i;
+
+	for (i = 0; i < length; i++) {
+		size_t len1 = strlen(list[i]);
+		size_t len2 = strlen(item);
+		if (!fstrncmp(list[i], item, len1 > len2 ? len2 : len1))
+			return 1;
+	}
+	return 0;
 }
 
 static void
@@ -115,6 +153,9 @@ cleanup(void)
 	for (i = 0; items && items[i].text; ++i)
 		free(items[i].text);
 	free(items);
+  for (i = 0; i < hplength; ++i)
+    free(hpitems[i]);
+  free(hpitems);
 	drw_free(drw);
 	XSync(dpy, False);
 	XCloseDisplay(dpy);
@@ -143,6 +184,8 @@ drawitem(struct item *item, int x, int y, int w)
 {
 	if (item == sel)
 		drw_setscheme(drw, scheme[SchemeSel]);
+	else if (item->hp)
+		drw_setscheme(drw, scheme[SchemeHp]);
 	else if (item->out)
 		drw_setscheme(drw, scheme[SchemeOut]);
 	else
@@ -244,7 +287,7 @@ match(void)
 	char buf[sizeof text], *s;
 	int i, tokc = 0;
 	size_t len, textsize;
-	struct item *item, *lprefix, *lsubstr, *prefixend, *substrend;
+	struct item *item, *lhpprefix, *lprefix, *lsubstr, *hpprefixend, *prefixend, *substrend;
 
 	strcpy(buf, text);
 	/* separate input text into tokens to be matched individually */
@@ -253,7 +296,7 @@ match(void)
 			die("cannot realloc %zu bytes:", tokn * sizeof *tokv);
 	len = tokc ? strlen(tokv[0]) : 0;
 
-	matches = lprefix = lsubstr = matchend = prefixend = substrend = NULL;
+	matches = lhpprefix = lprefix = lsubstr = matchend = hpprefixend = prefixend = substrend = NULL;
 	textsize = strlen(text) + 1;
 	for (item = items; item && item->text; item++) {
 		for (i = 0; i < tokc; i++)
@@ -261,13 +304,23 @@ match(void)
 				break;
 		if (i != tokc) /* not all tokens match */
 			continue;
-		/* exact matches go first, then prefixes, then substrings */
+		/* exact matches go first, then prefixes with high priority, then prefixes, then substrings */
 		if (!tokc || !fstrncmp(text, item->text, textsize))
 			appenditem(item, &matches, &matchend);
+		else if (item->hp && !fstrncmp(tokv[0], item->text, len))
+			appenditem(item, &lhpprefix, &hpprefixend);
 		else if (!fstrncmp(tokv[0], item->text, len))
 			appenditem(item, &lprefix, &prefixend);
 		else
 			appenditem(item, &lsubstr, &substrend);
+	}
+	if (lhpprefix) {
+		if (matches) {
+			matchend->right = lhpprefix;
+			lhpprefix->left = matchend;
+		} else
+			matches = lhpprefix;
+		matchend = hpprefixend;
 	}
 	if (lprefix) {
 		if (matches) {
@@ -574,6 +627,7 @@ readstdin(void)
 			die("strdup:");
 
 		items[i].out = 0;
+    items[i].hp = arrayhas(hpitems, hplength, items[i].text);
 	}
 	free(line);
 	if (items)
@@ -740,7 +794,8 @@ static void
 usage(void)
 {
 	die("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
-	    "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]");
+      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n"
+      "             [-hb color] [-hf color] [-hp items]\n");
 }
 
 int
@@ -782,8 +837,14 @@ main(int argc, char *argv[])
 			colors[SchemeSel][ColBg] = argv[++i];
 		else if (!strcmp(argv[i], "-sf"))  /* selected foreground color */
 			colors[SchemeSel][ColFg] = argv[++i];
+    else if (!strcmp(argv[i], "-hb")) /* high priority background color */
+      colors[SchemeHp][ColBg] = argv[++i];
+    else if (!strcmp(argv[i], "-hf")) /* high priority foreground color */
+      colors[SchemeHp][ColFg] = argv[++i];
 		else if (!strcmp(argv[i], "-w"))   /* embedding window id */
 			embed = argv[++i];
+    else if (!strcmp(argv[i], "-hp"))
+      hpitems = tokenize(argv[++i], ",", &hplength);
 		else if (!strcmp(argv[i], "-bw"))
 			border_width = atoi(argv[++i]); /* border width */
 		else
