@@ -1,3 +1,4 @@
 https://tools.suckless.org/dmenu/patches/center/dmenu-center-20200111-8cd37e1.diff
 https://tools.suckless.org/dmenu/patches/border/dmenu-border-5.2.diff
 https://tools.suckless.org/dmenu/patches/highpriority/dmenu-highpriority-5.1.diff
+https://tools.suckless.org/dmenu/patches/bar_height/dmenu-bar-height-5.2.diff
