@@ -63,7 +63,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char hpitems[] = "spotify,firefox,chrome,color-picker,codium,vim,neovim,librewolf,telegram,simplescreenrecorder";
+static const char hpitems[] = "shot,spotify,firefox,chrome,color-picker,codium,vim,neovim,librewolf,telegram,simplescreenrecorder";
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "7", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_dark_gray, "-sb", col_red, "-sf", col_gray4, "-hp", hpitems, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 
@@ -114,7 +114,6 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
