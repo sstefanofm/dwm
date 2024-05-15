@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo make clean install
+rm -f config.h
