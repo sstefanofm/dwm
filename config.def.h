@@ -1,31 +1,28 @@
-/* See LICENSE file for copyright and license details. */
+#include "theme.c"
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 10;       /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const int vertpad            = 10;        /* vertical bar padding */
-static const int sidepad            = 10;        /* horizontal bar padding */
-static const char *fonts[]          = { "SpaceMono Nerd Font:size=11" };
-static const char dmenufont[]       = "SpaceMono Nerd Font:size=11";
-static const char col_gray1[]       = "#222222";
-static const char col_black[]       = "#0f0f0f";
-static const char col_dark_gray[]   = "#797673";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#00b5c1";
-static const char col_red[]         = "#512424";
+static const unsigned int borderpx  = 2;            /* border pixel of windows */
+static const unsigned int gappx     = 10;           /* gaps between windows */
+static const unsigned int snap      = 32;           /* snap pixel */
+static const int showbar            = 1;            /* 0 means no bar */
+static const int topbar             = 1;            /* 0 means bottom bar */
+static const int vertpad            = 10;           /* vertical bar padding */
+static const int sidepad            = 10;           /* horizontal bar padding */
+static const char *fonts[]          = { "SpaceMono Nerd Font:size=11:style=Regular" };
+static const char dmenufont[]       = "SpaceMono Nerd Font:size=11:style=Regular";
+
+static const Theme theme            = th_pink_lain; /* theme.c */
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_dark_gray, col_black, col_gray2 },
-	[SchemeSel]  = { col_black, col_cyan,  col_cyan  },
+	/*               fg           bg           border   */
+	[SchemeNorm] = { theme.white, theme.black, theme.grey },
+	[SchemeSel]  = { theme.black, theme.red,   theme.red },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+/* numerals:
+ *  - javanese: "꧑", "꧒", "꧓", "꧔", "꧕", "꧖", "꧗", "꧘", "꧙"
+ * */
+static const char *tags[] = { "I", "II", "III", "IV", "V" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -66,7 +63,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char hpitems[] = "shot,spotify,firefox,chromium,color-picker,codium,vim,neovim,librewolf,telegram,simplescreenrecorder";
-static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "7", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_dark_gray, "-sb", col_cyan, "-sf", col_black, "-hp", hpitems, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "7", "-m", dmenumon, "-fn", dmenufont, "-nb", theme.black, "-nf", theme.white, "-sb", theme.red, "-sf", theme.black, "-hp", hpitems, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 
 static const Key keys[] = {
@@ -104,10 +101,12 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_3,                            2)
 	TAGKEYS(                        XK_4,                            3)
 	TAGKEYS(                        XK_5,                            4)
+  /*
 	TAGKEYS(                        XK_6,                            5)
 	TAGKEYS(                        XK_7,                            6)
 	TAGKEYS(                        XK_8,                            7)
 	TAGKEYS(                        XK_9,                            8)
+  */
 	{ MODKEY|ShiftMask,             XK_q,            quit,           {0} },
   { MODKEY|ShiftMask,             XK_r,            quit,           {1} },
 };
