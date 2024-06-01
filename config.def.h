@@ -1,6 +1,5 @@
 #include "theme.c"
 
-/* appearance */
 static const unsigned int borderpx  = 2;            /* border pixel of windows */
 static const unsigned int gappx     = 10;           /* gaps between windows */
 static const unsigned int snap      = 32;           /* snap pixel */
@@ -63,12 +62,14 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char hpitems[] = "shot,spotify,firefox,chromium,color-picker,codium,vim,neovim,librewolf,telegram,simplescreenrecorder";
-static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "7", "-m", dmenumon, "-fn", dmenufont, "-nb", theme.black, "-nf", theme.white, "-sb", theme.red, "-sf", theme.black, "-hp", hpitems, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-hp", hpitems, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
+static const char *sscmd[] = { "flameshot", "gui", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key              function        argument */
 	{ MODKEY,                       XK_d,            spawn,          {.v = dmenucmd } },
+  { MODKEY,                       XK_s,            spawn,          {.v = sscmd } },
   { MODKEY,                       XK_bracketleft,  shiftview,      {.i = -1} },
   { MODKEY,                       XK_bracketright, shiftview,      {.i = +1} },
 	{ MODKEY,                       XK_Return,       spawn,          {.v = termcmd } },
