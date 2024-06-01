@@ -6,7 +6,7 @@ static unsigned int lines        = 6;    /* -l option; vertical list with given 
 static unsigned int border_width = 2;    /* size of the window border */
 static const unsigned int alpha  = 0xb9; /* alpha transparency; 0xff is OPAQUE */
 
-static const char *prompt = NULL; /* -p option; prompt to the left of input field */
+static const char *prompt = " "; /* -p option; prompt to the left of input field */
 static const char *fonts[] = {
 	"SpaceMono Nerd Font:size=11:style=Regular"
 };
