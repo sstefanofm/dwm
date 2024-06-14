@@ -1,6 +1,6 @@
 #include "theme.c"
 
-static const unsigned int borderpx  = 2;            /* border pixel of windows */
+static const unsigned int borderpx  = 1;            /* border pixel of windows */
 static const unsigned int gappx     = 10;           /* gaps between windows */
 static const unsigned int snap      = 32;           /* snap pixel */
 static const int showbar            = 1;            /* 0 means no bar */
@@ -13,8 +13,8 @@ static const char dmenufont[]       = "SpaceMono Nerd Font:size=11:style=Regular
 static const Theme theme            = th_pink_lain; /* theme.c */
 static const char *colors[][3]      = {
 	/*               fg           bg           border   */
-	[SchemeNorm] = { theme.white, theme.black, theme.grey },
-	[SchemeSel]  = { theme.black, theme.red,   theme.red },
+	[SchemeNorm] = { theme.white, theme.black, theme.black },
+	[SchemeSel]  = { theme.black, theme.red,   theme.grey },
 };
 
 /* tagging */
