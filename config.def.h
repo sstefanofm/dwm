@@ -65,11 +65,13 @@ static const char hpitems[] = "shot,spotify,firefox,chromium,color-picker,codium
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-hp", hpitems, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *sscmd[] = { "flameshot", "gui", NULL };
+static const char *ckbcmd[] = { "chkeys.sh", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key              function        argument */
 	{ MODKEY,                       XK_d,            spawn,          {.v = dmenucmd } },
   { MODKEY,                       XK_s,            spawn,          {.v = sscmd } },
+  { MODKEY|ShiftMask,             XK_k,            spawn,          {.v = ckbcmd } },
   { MODKEY,                       XK_bracketleft,  shiftview,      {.i = -1} },
   { MODKEY,                       XK_bracketright, shiftview,      {.i = +1} },
 	{ MODKEY,                       XK_Return,       spawn,          {.v = termcmd } },
