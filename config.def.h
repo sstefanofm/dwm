@@ -4,7 +4,7 @@ static const unsigned int borderpx  = 1;            /* border pixel of windows *
 static const unsigned int gappx     = 10;           /* gaps between windows */
 static const unsigned int snap      = 32;           /* snap pixel */
 static const int showbar            = 1;            /* 0 means no bar */
-static const int topbar             = 1;            /* 0 means bottom bar */
+static const int topbar             = 0;            /* 0 means bottom bar */
 static const int vertpad            = 10;           /* vertical bar padding */
 static const int sidepad            = 10;           /* horizontal bar padding */
 static const char *fonts[]          = { "SpaceMono Nerd Font:size=11:style=Regular" };
@@ -33,6 +33,7 @@ static const Rule rules[] = {
   { "ColorPicker", NULL,   NULL,        0,            1,            -1 },
   { "Io.elementary.files", NULL, NULL,  0,            1,            -1 },
   { "SimpleScreenRecorder", NULL, NULL, 0,            1,            -1 },
+  { "TodoC",    NULL,       NULL,       0,            1,            0 },
 };
 
 /* layout(s) */
