@@ -3,6 +3,7 @@ static const Block blocks[] = {
   { "  ",   "memo.sh",	   5,                    0 },
   { "  ",   "date.sh",    900,                  0 },
   { "󰅒  ",   "hour.sh",    60,                   0 },
+  { "",      "vol.sh",     240,                  2 },
   { "",      "batt.sh",    120,                  1 },
 };
 
