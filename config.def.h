@@ -11,10 +11,19 @@ static const char *fonts[]          = { "SpaceMono Nerd Font:size=11:style=Regul
 static const char dmenufont[]       = "SpaceMono Nerd Font:size=11:style=Regular";
 
 static const Theme theme            = th_pink_lain; /* theme.c */
+
+/* TODO ORDER */
+static const char col_black[]       = "#000000";
+static const char col_red[]         = "#ff0000";
+static const char col_yellow[]      = "#ffff00";
+static const char col_white[]       = "#ffffff";
+
 static const char *colors[][3]      = {
 	/*               fg           bg           border   */
 	[SchemeNorm] = { theme.white, theme.black, theme.black },
 	[SchemeSel]  = { theme.black, theme.red,   theme.grey },
+	[SchemeWarn] =	 { col_yellow, theme.black, theme.black },
+	[SchemeUrgent]=	 { col_white, col_red,    col_red },
 };
 
 /* tagging */

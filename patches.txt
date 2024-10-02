@@ -4,3 +4,4 @@ https://dwm.suckless.org/patches/fullgaps/dwm-fullgaps-6.4.diff
 https://dwm.suckless.org/patches/notitle/dwm-notitle-6.2.diff
 https://dwm.suckless.org/patches/barpadding/dwm-barpadding-6.2.diff
 http://lists.suckless.org/dev/att-7590/shiftview.c
+https://dwm.suckless.org/patches/statuscolors/dwm-statuscolors-20220322-bece862.diff
