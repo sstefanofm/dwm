@@ -1,10 +1,20 @@
 #include "theme.h"
 
+#define WHITE_1 "#bab7b7"
+#define BLACK_1 "#0f0f0f"
+
 const Theme th_pink_lain = {
-  .white = "#bab7b7",
-  .black = "#0f0f0f",
+  .white = WHITE_1,
+  .black = BLACK_1,
   .grey  = "#797673",
   .red   = "#d36f87",
   .green = "#",
   .blue  = "#",
+  .bar   = {
+    .background = BLACK_1,
+    .normal  = WHITE_1,
+    .success = "#00ff00",
+    .warning = "#ffff00",
+    .error   = "#ff0000"
+  }
 };
