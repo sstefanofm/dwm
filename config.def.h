@@ -54,7 +54,7 @@ static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "",      tile },    /* first entry is default */
-	{ "󱔼",        NULL },    /* no layout function means floating behavior */
+	{ "󱔼",      NULL },    /* no layout function means floating behavior */
 	{ "",      monocle },
 };
 
@@ -76,12 +76,14 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *sscmd[] = { "flameshot", "gui", NULL };
 static const char *ckbcmd[] = { "chkeys.sh", NULL };
+static const char *get_win_t[] = { "cp_wm_class.sh", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key              function        argument */
 	{ MODKEY,                       XK_d,            spawn,          {.v = dmenucmd } },
   { MODKEY,                       XK_s,            spawn,          {.v = sscmd } },
   { MODKEY|ShiftMask,             XK_k,            spawn,          {.v = ckbcmd } },
+  { MODKEY|ShiftMask,             XK_w,            spawn,          {.v = get_win_t } },
   { MODKEY,                       XK_bracketleft,  shiftview,      {.i = -1} },
   { MODKEY,                       XK_bracketright, shiftview,      {.i = +1} },
 	{ MODKEY,                       XK_Return,       spawn,          {.v = termcmd } },
