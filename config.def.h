@@ -18,12 +18,15 @@ static const char col_red[]         = "#ff0000";
 static const char col_yellow[]      = "#ffff00";
 static const char col_white[]       = "#ffffff";
 
-static const char *colors[][3]      = {
-	/*               fg           bg           border   */
-	[SchemeNorm] = { theme.white, theme.black, theme.black },
-	[SchemeSel]  = { theme.black, theme.red,   theme.grey },
-	[SchemeWarn] =	 { col_yellow, theme.black, theme.black },
-	[SchemeUrgent]=	 { col_white, col_red,    col_red },
+static const char *colors[][3] = {
+  /*               fg            bg           border   */
+  [SchemeNorm] =  { theme.white, theme.black, theme.black },
+  [SchemeSel]  =  { theme.black, theme.red,   theme.grey },
+  /* dwmblocks: \0x3 \0x4 \0x5 \0x6 respectively (statuscolors patch) */
+  [SchemeBarNormal]  = { theme.bar.normal,  theme.bar.background, theme.bar.background },
+  [SchemeBarSuccess] = { theme.bar.success, theme.bar.background, theme.bar.background },
+  [SchemeBarWarning] = { theme.bar.warning, theme.bar.background, theme.bar.background },
+  [SchemeBarError]   = { theme.bar.error,   theme.bar.background, theme.bar.background },
 };
 
 /* tagging */
