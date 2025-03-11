@@ -13,7 +13,7 @@ const Theme th_pink_lain = {
   .bar   = {
     .background = BLACK_1,
     .normal  = WHITE_1,
-    .success = "#00ff00",
+    .success = "#01a1a2",
     .warning = "#ffff00",
     .error   = "#ff0000"
   }
