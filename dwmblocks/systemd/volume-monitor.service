@@ -1,0 +1,20 @@
+# Send update signal 2 to dwmblocks to run vol.sh script again
+# sudo cp volume-monitor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable volume-monitor
+# sudo systemctl start volume-monitor
+
+[Unit]
+Description=Volume Change Monitor for dwmblocks
+
+[Service]
+# Ensure pulseaudio is running before ExecStart
+ExecStartPre=/usr/bin/pulseaudio --start --daemonize
+ExecStart=/bin/bash -c 'pactl subscribe | while read; do /sbin/pkill -RTMIN+2 dwmblocks; done'
+# Always restart service if fails or stops
+Restart=always
+User=stf
+
+[Install]
+# Start service when user session is started
+WantedBy=default.target

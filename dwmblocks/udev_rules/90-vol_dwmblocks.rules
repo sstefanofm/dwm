@@ -1,7 +1,0 @@
-# Send update signal 2 to dwmblocks to run vol.sh script again
-
-SUBSYSTEM=="sound",\
-  ACTION=="change",\
-  RUN+="/sbin/pkill -RTMIN+2 dwmblocks"
-
-# sudo cp 90-vol_dwmblocks.rules /etc/udev/rules.d/
