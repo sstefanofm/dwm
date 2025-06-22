@@ -1,3 +1,4 @@
+#include <X11/XF86keysym.h>
 #include "theme.c"
 
 static const unsigned int borderpx  = 1;            /* border pixel of windows */
@@ -114,6 +115,7 @@ static const Key keys[] = {
   { MODKEY,                       XK_minus,        setgaps,        {.i = -1 } },
   { MODKEY,                       XK_equal,        setgaps,        {.i = +1 } },
   { MODKEY|ShiftMask,             XK_equal,        setgaps,        {.i =  0 } },
+  { 0,                            XF86XK_AudioMute,spawn,          SHCMD("volume_cmd.sh mute") },
 	TAGKEYS(                        XK_1,                            0)
 	TAGKEYS(                        XK_2,                            1)
 	TAGKEYS(                        XK_3,                            2)
