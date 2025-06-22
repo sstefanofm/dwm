@@ -115,7 +115,9 @@ static const Key keys[] = {
   { MODKEY,                       XK_minus,        setgaps,        {.i = -1 } },
   { MODKEY,                       XK_equal,        setgaps,        {.i = +1 } },
   { MODKEY|ShiftMask,             XK_equal,        setgaps,        {.i =  0 } },
-  { 0,                            XF86XK_AudioMute,spawn,          SHCMD("volume_cmd.sh mute") },
+  { 0,                    XF86XK_AudioMute,        spawn,          SHCMD("volume_cmd.sh mute") },
+  { 0,                    XF86XK_AudioRaiseVolume, spawn,          SHCMD("volume_cmd.sh up") },
+  { 0,                    XF86XK_AudioLowerVolume, spawn,          SHCMD("volume_cmd.sh down") },
 	TAGKEYS(                        XK_1,                            0)
 	TAGKEYS(                        XK_2,                            1)
 	TAGKEYS(                        XK_3,                            2)
