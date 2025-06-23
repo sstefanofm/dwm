@@ -78,16 +78,13 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char hpitems[] = "shot,spotify,firefox,chromium,color-picker,codium,vim,neovim,librewolf,telegram,simplescreenrecorder";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-hp", hpitems, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
-static const char *sscmd[] = { "flameshot", "gui", NULL };
-static const char *ckbcmd[] = { "chkeys.sh", NULL };
-static const char *get_win_t[] = { "cp_wm_class.sh", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key              function        argument */
 	{ MODKEY,                       XK_d,            spawn,          {.v = dmenucmd } },
-  { MODKEY,                       XK_s,            spawn,          {.v = sscmd } },
-  { MODKEY|ShiftMask,             XK_k,            spawn,          {.v = ckbcmd } },
-  { MODKEY|ShiftMask,             XK_w,            spawn,          {.v = get_win_t } },
+  { MODKEY,                       XK_s,            spawn,          SHCMD("flameshot gui") },
+  { MODKEY|ShiftMask,             XK_k,            spawn,          SHCMD("chkeys.sh") },
+  { MODKEY|ShiftMask,             XK_w,            spawn,          SHCMD("cp_wm_class.sh") },
   { MODKEY,                       XK_bracketleft,  shiftview,      {.i = -1} },
   { MODKEY,                       XK_bracketright, shiftview,      {.i = +1} },
 	{ MODKEY,                       XK_Return,       spawn,          {.v = termcmd } },
