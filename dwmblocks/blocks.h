@@ -1,5 +1,6 @@
 static const Block blocks[] = {
   /* Icon */ /* Command */ /* Update Interval */ /* Update Signal */
+  { "  ",   "qkey.sh",	   0,                    3 },
   { "  ",   "memo.sh",	   5,                    0 },
   { "  ",   "date.sh",    900,                  0 },
   { "󰅒  ",   "hour.sh",    60,                   0 },
